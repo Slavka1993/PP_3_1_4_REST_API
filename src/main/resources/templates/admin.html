@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All_users</title>
+</head>
+<body>
+
+All users!
+
+<a th:href="@{/admin/create}"> New User </a>
+<table th:border="1" th:cellpadding="5">
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Role</th>
+
+    </tr>
+    <tr th:each="users : ${users}">
+        <td th:text="${users.username}"></td>
+        <td th:text="${users.email}"></td>
+        <td th:each="role: ${users.roles}" th:text="${role.name.replace('ROLE_', '')}">role</td>
+        <td>
+            <a th:href="@{/admin/edit/{id}(id=${users.id})}">Edit</a>
+            <form th:action="@{/admin/delete}" method="post" style="display:inline;" onsubmit="return confirm('Really delete???');">
+                <input type="hidden" name="id" th:value="${users.id}"/>
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+</table>
+<form th:action="@{/logout}" method="get"><input type="submit" value="Logout"/></form>
+<br>
+
+
+</body>
+</html>
