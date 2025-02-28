@@ -28,7 +28,7 @@ public class User implements UserDetails {
             joinColumns = @JoinColumn(name = "users_id"),
             inverseJoinColumns = @JoinColumn(name = "roles_id")
     )
-    private Set<Role> roles = new HashSet<>();
+    public Set<Role> roles = new HashSet<>();
 
     public User() {
     }
@@ -105,5 +105,9 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public boolean isAdmin() {
+        return roles.stream().anyMatch(role -> role.getName().equals("ROLE_ADMIN"));
     }
 }

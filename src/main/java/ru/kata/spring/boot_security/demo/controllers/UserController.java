@@ -26,8 +26,9 @@ public class UserController {
     public String index(Model model, Principal principal) {
         User user = userService.findByUsername(principal.getName());
         model.addAttribute("user", user);
-        System.out.println(user.getRoles());
+        System.out.println("Roles: " + user.getRoles());
         System.out.println("User: " + user);
+
         return "user";
     }
 }
