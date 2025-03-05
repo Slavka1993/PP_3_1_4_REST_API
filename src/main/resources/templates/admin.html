@@ -179,7 +179,7 @@
                     <h5 class="modal-title" id="deleteModalLabel">Delete user</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form th:method="POST" th:action="@{/admin/delete}" th:object="${user}">
+                <form th:method="POST" th:action="@{'/admin/delete/' + ${user.id}}" th:object="${user}">
                     <div class="modal-body text-center">
                         <input th:name="delId" type="hidden" th:value="${user.id}"/>
 
@@ -213,4 +213,3 @@
 
 </body>
 </html>
-

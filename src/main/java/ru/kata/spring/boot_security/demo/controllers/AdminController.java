@@ -72,4 +72,9 @@ public class AdminController {
     public String index(Model model) {
         return "index";
     }
+
+    @GetMapping("/admin")
+    public String admin(Model model) {
+        return "admin";
+    }
 }

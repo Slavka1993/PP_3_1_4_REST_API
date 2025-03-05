@@ -5,8 +5,8 @@
     <title>Edit</title>
 </head>
 <body>
-<form th:action="@{/admin/edit/{id}(id=${id})}" th:object="${user}" method="post">
-
+<form th:action="@{/admin/edit/{id}(id=*{id})}" th:object="${user}" method="post">
+    <input type="hidden" th:field="*{id}">
     <div>
         <label for="username">Username</label>
         <input type="text" id="username" name="username" th:field="*{username}">

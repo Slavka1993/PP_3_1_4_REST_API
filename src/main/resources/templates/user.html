@@ -19,16 +19,11 @@
 <div class="d-flex" style="min-height: 100vh;">
     <!-- Боковая панель -->
     <div class="d-flex flex-column p-3 bg-white border-end" style="width: 200px;">
-<!--        <a th:href="@{/admin}" class="btn btn-primary mb-2">Admin</a>-->
-
-<!--        <a th:href="@{/user}" class="btn btn-secondary">User</a>-->
         <div th:if="${user.isAdmin()}">
             <a th:href="@{/admin}" class="btn btn-primary mb-2 w-100">Admin</a>
         </div>
 
         <a th:href="@{/user}" class="btn btn-secondary w-100">User</a>
-
-
     </div>
 
     <!-- Основной контент -->
