@@ -11,7 +11,7 @@
         <span class="navbar-text text-white">
             <strong th:text="${user.email}"></strong>
             with roles:
-            <strong th:each="role: ${user.roles}" th:text="${role.name.replace('ROLE_', '')}"></strong>
+            <strong th:each="role: ${user.roles}" th:text="${role.role.replace('ROLE_', '')}"></strong>
         </span>
         <a th:href="@{/logout}" class="ms-auto me-3 text-white text-decoration-none align-self-center">Logout</a>
     </div>
@@ -36,6 +36,7 @@
         <table class="table table-striped mt-3">
             <thead>
             <tr>
+                <th>Id</th>
                 <th>Name</th>
                 <th>Email</th>
                 <th>Roles</th>
@@ -43,11 +44,12 @@
             </thead>
             <tbody>
             <tr>
+                <td th:text="${user.id}"></td>
                 <td th:text="${user.username}"></td>
                 <td th:text="${user.email}"></td>
                 <td>
                         <span th:each="role, iterStat : ${user.roles}"
-                              th:text="${role.name.replace('ROLE_', '')} + (${!iterStat.last} ? ', ' : '')">
+                              th:text="${role.role.replace('ROLE_', '')} + (${!iterStat.last} ? ', ' : '')">
                         </span>
                 </td>
             </tr>

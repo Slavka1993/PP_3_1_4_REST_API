@@ -21,16 +21,25 @@ public class Dbinitialization {
 
     @PostConstruct
     public void init() {
-        Role roleUser = new Role("ROLE_USER");
-        Role roleAdmin = new Role("ROLE_ADMIN");
+
+        Role roleAdmin = new Role();
+        roleAdmin.setRole("ROLE_ADMIN");
+
+        Role roleUser = new Role();
+        roleUser.setRole("ROLE_USER");
 
         roleService.addRole(roleUser);
         roleService.addRole(roleAdmin);
+        System.out.println("Создаю роли: " + roleUser.getRole() + ", " + roleAdmin.getRole());
 
         User userAdmin = new User("admin", "admin", "admin@mail.ru");
         User user = new User("user", "user", "user@mail.ru");
 
-        userService.addUser(user, Set.of(roleUser));
-        userService.addUser(userAdmin, Set.of(roleAdmin));
+        userAdmin.setRoles(Set.of(roleAdmin));
+        user.setRoles(Set.of(roleUser));
+        userService.save(user);
+        userService.save(userAdmin);
+        System.out.println("Роли пользователя: " + user.getRoles());
+        System.out.println("Роль админа: " + userAdmin.getRoles());
     }
 }

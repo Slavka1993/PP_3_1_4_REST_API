@@ -15,20 +15,24 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String username;
-
     private String password;
-
     private String email;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "users_roles",
+    @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "users_id"),
             inverseJoinColumns = @JoinColumn(name = "roles_id")
     )
-    public Set<Role> roles = new HashSet<>();
+    private Set<Role> roles;
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
 
     public User() {
     }
@@ -64,12 +68,9 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    @Override
+    public String getPassword() {
+        return password;
     }
 
     @Override
@@ -77,10 +78,6 @@ public class User implements UserDetails {
         return roles;
     }
 
-    @Override
-    public String getPassword() {
-        return password;
-    }
 
     @Override
     public String getUsername() {
@@ -108,6 +105,6 @@ public class User implements UserDetails {
     }
 
     public boolean isAdmin() {
-        return roles.stream().anyMatch(role -> role.getName().equals("ROLE_ADMIN"));
+        return roles.stream().anyMatch(role -> role.getAuthority().equals("ROLE_ADMIN"));
     }
 }

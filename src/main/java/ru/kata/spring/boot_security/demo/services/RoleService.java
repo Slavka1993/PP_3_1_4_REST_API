@@ -11,4 +11,7 @@ public interface RoleService {
     Set<Role> findRoles(List<Long> roles);
 
     void addRole(Role role);
+
+
+
 }
