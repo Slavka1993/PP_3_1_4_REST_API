@@ -1,10 +1,10 @@
-package ru.kata.spring.boot_security.demo.initialization;
+package ru.kata.spring.rest_api.initialization;
 
 import org.springframework.stereotype.Component;
-import ru.kata.spring.boot_security.demo.models.Role;
-import ru.kata.spring.boot_security.demo.models.User;
-import ru.kata.spring.boot_security.demo.services.RoleService;
-import ru.kata.spring.boot_security.demo.services.UserService;
+import ru.kata.spring.rest_api.models.Role;
+import ru.kata.spring.rest_api.models.User;
+import ru.kata.spring.rest_api.services.RoleService;
+import ru.kata.spring.rest_api.services.UserService;
 
 import javax.annotation.PostConstruct;
 import java.util.Set;
@@ -37,8 +37,8 @@ public class Dbinitialization {
 
         userAdmin.setRoles(Set.of(roleAdmin));
         user.setRoles(Set.of(roleUser));
-        userService.save(user);
-        userService.save(userAdmin);
+        userService.create(user);
+        userService.create(userAdmin);
         System.out.println("Роли пользователя: " + user.getRoles());
         System.out.println("Роль админа: " + userAdmin.getRoles());
     }

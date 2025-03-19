@@ -1,4 +1,4 @@
-package ru.kata.spring.boot_security.demo.configs;
+package ru.kata.spring.rest_api.configs;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -29,18 +29,28 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
-                .antMatchers("/user").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
-                .antMatchers("/login").permitAll()
+                .antMatchers("/api/**").hasRole("ADMIN") // API доступен только для ADMIN
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/user/**").hasAnyRole("USER", "ADMIN")
+                .antMatchers("/", "/index").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().successHandler(successUserHandler)
+                .formLogin()
+                .successHandler(successUserHandler)
                 .permitAll()
                 .and()
-                .csrf().disable()
                 .logout()
-                .permitAll();
+                .logoutSuccessUrl("/login")
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID")
+                .permitAll()
+                .and()
+                .sessionManagement() // Настройка управления сессиями
+                .sessionFixation().migrateSession() // Защита от атак фиксации сессии
+                .maximumSessions(1) // Ограничение: только одна активная сессия на пользователя
+                .expiredUrl("/login?expired"); // Перенаправление на страницу логина при истечении сессии
     }
 
 

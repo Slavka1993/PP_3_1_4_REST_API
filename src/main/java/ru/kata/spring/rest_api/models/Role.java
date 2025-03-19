@@ -1,10 +1,9 @@
-package ru.kata.spring.boot_security.demo.models;
+package ru.kata.spring.rest_api.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "roles")
@@ -15,9 +14,12 @@ public class Role implements GrantedAuthority {
 
     private String role;
 
+    public Role() {
+    }
+
     @Override
     public String getAuthority() {
-        return role;
+        return role != null ? role : "ROLE_" + id;
     }
 
     public void setId(long id) {
