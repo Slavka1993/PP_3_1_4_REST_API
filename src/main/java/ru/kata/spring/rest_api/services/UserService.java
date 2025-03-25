@@ -22,4 +22,6 @@ public interface UserService {
     User oneUser();
 
     UserDetails loadUserByUsername(String username);
+
+    User updateUserFields(User existingUser, User updatedUser);
 }
