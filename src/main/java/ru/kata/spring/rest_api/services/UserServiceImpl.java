@@ -8,14 +8,12 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.kata.spring.rest_api.models.Role;
 import ru.kata.spring.rest_api.models.User;
 import ru.kata.spring.rest_api.repository.UserRepository;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 @Transactional(readOnly = true)
@@ -106,6 +104,4 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return (User) authentication.getPrincipal();
     }
-
-
 }

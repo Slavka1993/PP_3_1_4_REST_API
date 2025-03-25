@@ -5,7 +5,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.rest_api.models.Role;
 import ru.kata.spring.rest_api.models.User;
-import ru.kata.spring.rest_api.repository.RoleRepository;
 import ru.kata.spring.rest_api.services.RoleService;
 import ru.kata.spring.rest_api.services.UserService;
 
